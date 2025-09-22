@@ -1,0 +1,172 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ai_playground_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - name: Checkout код
+      uses: actions/checkout@v4
+
+    - name: Настройка Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+
+    - name: Установка зависимостей
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -e .
+
+    - name: Линтеры и форматирование
+      run: |
+        # Проверка форматирования
+        black --check backend/ ml_core/ tests/
+        
+        # Проверка сортировки импортов
+        isort --check-only backend/ ml_core/ tests/
+        
+        # Статический анализ
+        flake8 backend/ ml_core/ tests/
+        
+        # Проверка типов
+        mypy backend/ ml_core/
+
+    - name: Запуск тестов
+      env:
+        DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/ai_playground_test
+        SECRET_KEY: test-secret-key-for-ci-pipeline
+        ENVIRONMENT: testing
+      run: |
+        pytest --cov=backend --cov=ml_core --cov-report=xml --cov-report=term-missing
+
+    - name: Загрузка покрытия в Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - name: Checkout код
+      uses: actions/checkout@v4
+
+    - name: Настройка Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Вход в Docker Hub
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Извлечение метаданных
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          ${{ secrets.DOCKER_USERNAME }}/ai-backend-playground
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+
+    - name: Сборка и отправка образа
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  security:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Checkout код
+      uses: actions/checkout@v4
+
+    - name: Настройка Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Установка зависимостей безопасности
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+
+    - name: Проверка уязвимостей зависимостей
+      run: |
+        safety check --full-report
+
+    - name: Анализ безопасности кода
+      run: |
+        bandit -r backend/ ml_core/ -f json -o bandit-report.json || true
+
+    - name: Загрузка отчета безопасности
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: bandit-report.json
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test, build, security]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    environment:
+      name: production
+      url: https://your-app-url.com
+
+    steps:
+    - name: Checkout код
+      uses: actions/checkout@v4
+
+    - name: Деплой на production
+      run: |
+        echo "🚀 Здесь будет настройка деплоя на облачную платформу"
+        echo "Например: Heroku, Railway, DigitalOcean, AWS, etc."
+        # Пример для Heroku:
+        # git remote add heroku https://git.heroku.com/your-app-name.git
+        # git push heroku main
+
+    - name: Уведомление об успешном деплое
+      run: |
+        echo "✅ Приложение успешно развернуто!"
+        echo "📊 Версия: ${{ github.sha }}"
+        echo "🌐 URL: https://your-app-url.com"
