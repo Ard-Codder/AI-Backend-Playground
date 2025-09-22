@@ -41,7 +41,7 @@ async def ml_info(
             }
         ],
         "message": "All ML algorithms are implemented and ready to use via CLI",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "features": [
             "Custom implementations from scratch using NumPy",
             "CLI interfaces for all algorithms",

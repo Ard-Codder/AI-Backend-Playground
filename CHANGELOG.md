@@ -2,6 +2,15 @@
 
 All notable changes to AI Backend Playground will be documented in this file.
 
+## [1.0.2] - 2024-09-22
+
+### Fixed
+- Updated author information in pyproject.toml (Ard-Codder, kirartmax1@gmail.com)
+- Fixed GitHub repository links throughout documentation
+- Updated Docker image references to use correct registry
+- Improved security key placeholders with clearer instructions
+- Standardized example email addresses in documentation
+
 ## [1.0.1] - 2024-09-22
 
 ### 📚 **Documentation Optimization**
