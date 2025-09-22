@@ -730,7 +730,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: your-registry/ai-backend:latest
+        image: ardcodder/ai-backend:latest
         ports:
         - containerPort: 8000
         env:

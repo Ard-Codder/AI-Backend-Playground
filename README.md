@@ -54,7 +54,7 @@ ai-backend-playground/
 ### 1. Клонирование и настройка
 
 ```bash
-git clone https://github.com/yourusername/ai-backend-playground.git
+git clone https://github.com/Ard-Codder/ai-backend-playground.git
 cd ai-backend-playground
 
 # Создание виртуального окружения
@@ -102,7 +102,7 @@ docker-compose ps
 curl -X POST "http://localhost:8000/api/v1/auth/register" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "user@example.com",
+    "email": "demo@example.com",
     "username": "testuser",
     "password": "securepassword123",
     "full_name": "Test User"
@@ -121,7 +121,7 @@ curl -X POST "http://localhost:8000/api/v1/auth/login" \
 
 ```bash
 curl -X POST "http://localhost:8000/api/v1/tasks/" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Authorization: Bearer <YOUR_JWT_TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
     "title": "Изучить FastAPI",

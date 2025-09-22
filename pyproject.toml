@@ -61,7 +61,7 @@ build-backend = "setuptools.build_meta"
 name = "ai-backend-playground"
 version = "1.0.1"
 description = "AI Backend Playground - FastAPI + ML algorithms from scratch"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
+authors = [{name = "Ard-Codder", email = "kirartmax1@gmail.com"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.11"
@@ -100,9 +100,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/ai-backend-playground"
-Repository = "https://github.com/yourusername/ai-backend-playground"
-Issues = "https://github.com/yourusername/ai-backend-playground/issues"
+Homepage = "https://github.com/Ard-Codder/ai-backend-playground"
+Repository = "https://github.com/Ard-Codder/ai-backend-playground"
+Issues = "https://github.com/Ard-Codder/ai-backend-playground/issues"
 
 [project.scripts]
 ml-kmeans = "ml_core.kmeans:main"

@@ -23,7 +23,7 @@
 ### Quick Start
 ```bash
 # 1. Clone and enter project
-git clone <your-repo-url>
+git clone https://github.com/Ard-Codder/ai-backend-playground.git
 cd ai-backend-playground
 
 # 2. Start all services
@@ -553,7 +553,7 @@ make ml-kmeans ARGS="--data data.csv --clusters 3"  # Run ML algorithms
 2. **VPS Deployment**
    ```bash
    # On server
-   git clone <your-repo>
+   git clone https://github.com/Ard-Codder/ai-backend-playground.git
    cd ai-backend-playground
    docker-compose up -d
    ```
@@ -570,7 +570,7 @@ make ml-kmeans ARGS="--data data.csv --clusters 3"  # Run ML algorithms
        spec:
          containers:
          - name: backend
-           image: your-registry/ai-backend:latest
+           image: ardcodder/ai-backend:latest
            ports:
            - containerPort: 8000
    ```
@@ -579,10 +579,10 @@ make ml-kmeans ARGS="--data data.csv --clusters 3"  # Run ML algorithms
 ```bash
 # Production environment variables
 DATABASE_URL=postgresql://user:pass@prod-db:5432/ai_playground
-SECRET_KEY=your-super-secure-secret-key-minimum-32-characters
+SECRET_KEY=change-this-secret-key-in-production-32-chars-min
 ENVIRONMENT=production
 DEBUG=false
-ALLOWED_HOSTS=["yourdomain.com"]
+ALLOWED_HOSTS=["your-domain.com"]
 ```
 
 ---
