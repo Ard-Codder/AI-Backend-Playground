@@ -18,30 +18,36 @@ router = APIRouter()
 async def ml_info(
     current_user: User = Depends(get_current_active_user)
 ) -> Dict[str, Any]:
-    """Информация о доступных ML алгоритмах"""
+    """Information about available ML algorithms"""
     return {
         "available_algorithms": [
             {
                 "name": "K-Means",
-                "description": "Алгоритм кластеризации K-средних",
-                "endpoint": "/api/v1/ml/kmeans",
-                "status": "coming_soon"
+                "description": "K-Means clustering algorithm implemented from scratch",
+                "cli_command": "python -m ml_core.kmeans --data data.csv --clusters 3",
+                "status": "available"
             },
             {
                 "name": "Decision Tree",
-                "description": "Дерево решений для классификации",
-                "endpoint": "/api/v1/ml/decision-tree",
-                "status": "coming_soon"
+                "description": "Decision tree classifier with information gain",
+                "cli_command": "python -m ml_core.decision_tree --data data.csv --target class",
+                "status": "available"
             },
             {
                 "name": "Random Forest",
-                "description": "Случайный лес для классификации и регрессии",
-                "endpoint": "/api/v1/ml/random-forest",
-                "status": "coming_soon"
+                "description": "Random forest ensemble with bootstrap sampling",
+                "cli_command": "python -m ml_core.random_forest --data data.csv --target class",
+                "status": "available"
             }
         ],
-        "message": "ML модули будут реализованы в следующих версиях",
-        "version": "0.1.0"
+        "message": "All ML algorithms are implemented and ready to use via CLI",
+        "version": "1.0.0",
+        "features": [
+            "Custom implementations from scratch using NumPy",
+            "CLI interfaces for all algorithms",
+            "Performance testing and validation",
+            "Sample data included for testing"
+        ]
     }
 
 

@@ -2,7 +2,7 @@
 ML Core - реализация алгоритмов машинного обучения с нуля
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 __author__ = "AI Backend Playground"
 
 from .kmeans import KMeans
