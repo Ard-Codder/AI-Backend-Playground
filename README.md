@@ -296,5 +296,12 @@ docker-compose up -d
 
 ---
 
+## 📚 Дополнительная документация
+
+- **[ARCHITECTURE_GUIDE.md](ARCHITECTURE_GUIDE.md)** - Детальная техническая архитектура
+- **[HOW_IT_WORKS.md](HOW_IT_WORKS.md)** - Полное объяснение всех компонентов (English)
+- **[CHANGELOG.md](CHANGELOG.md)** - История изменений и релизов
+
+---
+
 ⭐ Если проект был полезен, поставьте звездочку!
-AI Backend Playground is a learning and practical project to demonstrate skills in Backend Development, Machine Learning, and AI Engineering. The goal is to build a unified codebase that covers a wide technology stack — from a simple CRUD service to advanced AI/ML solutions deployed in production.
