@@ -15,9 +15,8 @@ from fastapi import (  # type: ignore
     status,
 )
 
-from backend.app.models.user import User
-
 from ..auth.security import get_current_active_user
+from ..models.user import User
 
 router = APIRouter()
 

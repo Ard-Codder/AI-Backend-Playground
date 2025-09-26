@@ -8,8 +8,7 @@ from typing import List, Optional
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.models.task import Task, TaskStatus
-
+from ..models.task import Task, TaskStatus
 from ..schemas.task import TaskCreate, TaskUpdate
 
 

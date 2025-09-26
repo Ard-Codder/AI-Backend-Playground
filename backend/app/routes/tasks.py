@@ -7,11 +7,10 @@ from typing import Any, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status  # type: ignore
 from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
-from backend.app.models.task import TaskStatus
-from backend.app.models.user import User
-
 from ..auth.security import get_current_active_user
 from ..db import get_db
+from ..models.task import TaskStatus
+from ..models.user import User
 from ..schemas.task import TaskCreate, TaskResponse, TaskUpdate
 from ..services.task_service import TaskService
 

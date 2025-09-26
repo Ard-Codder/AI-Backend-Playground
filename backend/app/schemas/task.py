@@ -7,7 +7,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from backend.app.models.task import TaskPriority, TaskStatus
+from ..models.task import TaskPriority, TaskStatus
 
 
 class TaskBase(BaseModel):

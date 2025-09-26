@@ -10,10 +10,9 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError, jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.models.user import User
-
 from ..config import settings
 from ..db import get_db
+from ..models.user import User
 from ..schemas.auth import TokenData
 from ..services.user_service import UserService
 
