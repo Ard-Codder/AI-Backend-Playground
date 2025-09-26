@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..auth.security import get_password_hash, verify_password
+from ..auth.password import get_password_hash, verify_password
 from ..models.user import User
 from ..schemas.user import UserCreate, UserUpdate
 

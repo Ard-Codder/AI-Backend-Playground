@@ -8,7 +8,6 @@ from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..config import settings
@@ -17,21 +16,10 @@ from ..models.user import User
 from ..schemas.auth import TokenData
 from ..services.user_service import UserService
 
-# Контекст для хеширования паролей
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 # HTTP Bearer схема для токенов
 security = HTTPBearer()
 
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Проверка пароля"""
-    return bool(pwd_context.verify(plain_password, hashed_password))
-
-
-def get_password_hash(password: str) -> str:
-    """Хеширование пароля"""
-    return str(pwd_context.hash(password))
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
