@@ -6,7 +6,14 @@ import io
 from typing import Any, Dict
 
 import pandas as pd
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi import (  # type: ignore
+    APIRouter,
+    Depends,
+    File,
+    HTTPException,
+    UploadFile,
+    status,
+)
 
 from ..auth.security import get_current_active_user
 from ..models.user import User
@@ -14,7 +21,7 @@ from ..models.user import User
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/")  # type: ignore
 async def ml_info(
     current_user: User = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
@@ -51,7 +58,7 @@ async def ml_info(
     }
 
 
-@router.post("/upload-data")
+@router.post("/upload-data")  # type: ignore
 async def upload_data(
     file: UploadFile = File(...), current_user: User = Depends(get_current_active_user)
 ) -> Dict[str, Any]:

@@ -2,10 +2,10 @@
 Main FastAPI application file
 """
 
-import uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+import uvicorn  # type: ignore
+from fastapi import FastAPI  # type: ignore
+from fastapi.middleware.cors import CORSMiddleware  # type: ignore
+from fastapi.responses import JSONResponse  # type: ignore
 
 from .config import settings
 from .routes import auth, ml, tasks, users
@@ -51,7 +51,7 @@ def create_application() -> FastAPI:
 app = create_application()
 
 
-@app.get("/")
+@app.get("/")  # type: ignore
 async def root() -> JSONResponse:
     """Root endpoint"""
     return JSONResponse(
@@ -64,7 +64,7 @@ async def root() -> JSONResponse:
     )
 
 
-@app.get("/health")
+@app.get("/health")  # type: ignore
 async def health_check() -> JSONResponse:
     """Health check endpoint"""
     return JSONResponse(

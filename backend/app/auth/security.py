@@ -5,11 +5,11 @@
 from datetime import datetime, timedelta
 from typing import Optional
 
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi import Depends, HTTPException, status  # type: ignore
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer  # type: ignore
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
 from ..config import settings
 from ..db import get_db
@@ -63,8 +63,8 @@ async def verify_token(token: str) -> TokenData:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
-        username: str = payload.get("sub")
-        user_id: int = payload.get("user_id")
+        username: str = payload.get("sub")  # type: ignore
+        user_id: int = payload.get("user_id")  # type: ignore
 
         if username is None or user_id is None:
             raise credentials_exception

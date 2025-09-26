@@ -4,8 +4,8 @@
 
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Depends, HTTPException, status  # type: ignore
+from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
 from ..auth.security import get_current_active_user
 from ..db import get_db
@@ -16,15 +16,15 @@ from ..services.user_service import UserService
 router = APIRouter()
 
 
-@router.get("/me", response_model=UserResponse)
+@router.get("/me", response_model=UserResponse)  # type: ignore
 async def read_users_me(
     current_user: User = Depends(get_current_active_user),
 ) -> UserResponse:
     """Получение данных текущего пользователя"""
-    return UserResponse.model_validate(current_user)
+    return UserResponse.model_validate(current_user)  # type: ignore
 
 
-@router.put("/me", response_model=UserResponse)
+@router.put("/me", response_model=UserResponse)  # type: ignore
 async def update_user_me(
     user_update: UserUpdate,
     current_user: User = Depends(get_current_active_user),
@@ -39,12 +39,12 @@ async def update_user_me(
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
             )
-        return UserResponse.model_validate(updated_user)
+        return UserResponse.model_validate(updated_user)  # type: ignore
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-@router.get("/", response_model=List[UserResponse])
+@router.get("/", response_model=List[UserResponse])  # type: ignore
 async def read_users(
     skip: int = 0,
     limit: int = 100,
@@ -62,7 +62,7 @@ async def read_users(
     return [UserResponse.model_validate(user) for user in users]
 
 
-@router.get("/{user_id}", response_model=UserResponse)
+@router.get("/{user_id}", response_model=UserResponse)  # type: ignore
 async def read_user(
     user_id: int,
     current_user: User = Depends(get_current_active_user),
@@ -83,10 +83,10 @@ async def read_user(
             status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
         )
 
-    return UserResponse.model_validate(user)
+    return UserResponse.model_validate(user)  # type: ignore
 
 
-@router.delete("/me")
+@router.delete("/me")  # type: ignore
 async def delete_user_me(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),

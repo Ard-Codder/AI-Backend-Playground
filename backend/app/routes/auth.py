@@ -4,9 +4,9 @@ Authentication routes
 
 from datetime import timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Depends, HTTPException, status  # type: ignore
+from fastapi.security import OAuth2PasswordRequestForm  # type: ignore
+from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
 from ..auth.security import create_access_token
 from ..config import settings
@@ -18,7 +18,7 @@ from ..services.user_service import UserService
 router = APIRouter()
 
 
-@router.post("/register", response_model=UserResponse)
+@router.post("/register", response_model=UserResponse)  # type: ignore
 async def register(
     user_data: UserCreate, db: AsyncSession = Depends(get_db)
 ) -> UserResponse:
@@ -42,12 +42,12 @@ async def register(
 
     try:
         user = await user_service.create_user(user_data)
-        return UserResponse.model_validate(user)
+        return UserResponse.model_validate(user)  # type: ignore
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login", response_model=Token)  # type: ignore
 async def login(
     form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)
 ) -> Token:

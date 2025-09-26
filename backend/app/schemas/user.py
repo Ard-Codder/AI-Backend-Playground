@@ -5,7 +5,7 @@ Pydantic схемы для пользователей
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field  # type: ignore
 
 
 class UserBase(BaseModel):

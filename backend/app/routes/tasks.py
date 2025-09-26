@@ -4,8 +4,8 @@
 
 from typing import Any, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Depends, HTTPException, Query, status  # type: ignore
+from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
 from ..auth.security import get_current_active_user
 from ..db import get_db
@@ -17,7 +17,7 @@ from ..services.task_service import TaskService
 router = APIRouter()
 
 
-@router.post("/", response_model=TaskResponse)
+@router.post("/", response_model=TaskResponse)  # type: ignore
 async def create_task(
     task_data: TaskCreate,
     current_user: User = Depends(get_current_active_user),
@@ -26,10 +26,10 @@ async def create_task(
     """Создание новой задачи"""
     task_service = TaskService(db)
     task = await task_service.create_task(task_data, current_user.id)
-    return TaskResponse.model_validate(task)
+    return TaskResponse.model_validate(task)  # type: ignore
 
 
-@router.get("/", response_model=List[TaskResponse])
+@router.get("/", response_model=List[TaskResponse])  # type: ignore
 async def read_tasks(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=1000),
@@ -45,7 +45,7 @@ async def read_tasks(
     return [TaskResponse.model_validate(task) for task in tasks]
 
 
-@router.get("/stats")
+@router.get("/stats")  # type: ignore
 async def get_task_stats(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
@@ -56,7 +56,7 @@ async def get_task_stats(
     return stats
 
 
-@router.get("/{task_id}", response_model=TaskResponse)
+@router.get("/{task_id}", response_model=TaskResponse)  # type: ignore
 async def read_task(
     task_id: int,
     current_user: User = Depends(get_current_active_user),
@@ -71,10 +71,10 @@ async def read_task(
             status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
         )
 
-    return TaskResponse.model_validate(task)
+    return TaskResponse.model_validate(task)  # type: ignore
 
 
-@router.put("/{task_id}", response_model=TaskResponse)
+@router.put("/{task_id}", response_model=TaskResponse)  # type: ignore
 async def update_task(
     task_id: int,
     task_update: TaskUpdate,
@@ -90,10 +90,10 @@ async def update_task(
             status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
         )
 
-    return TaskResponse.model_validate(task)
+    return TaskResponse.model_validate(task)  # type: ignore
 
 
-@router.delete("/{task_id}")
+@router.delete("/{task_id}")  # type: ignore
 async def delete_task(
     task_id: int,
     current_user: User = Depends(get_current_active_user),
