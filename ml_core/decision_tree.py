@@ -168,6 +168,8 @@ class DecisionTree:
             np.random.seed(self.random_state)
 
         self.root = self._build_tree(X, y)
+        if self.root is None:
+            raise ValueError("Ошибка при построении дерева")
         return self
 
     def _predict_sample(self, x: np.ndarray, node: Node) -> Union[int, float]:
@@ -176,8 +178,12 @@ class DecisionTree:
             return node.value
 
         if x[node.feature] <= node.threshold:
+            if node.left is None:
+                raise ValueError("Левый узел не найден")
             return self._predict_sample(x, node.left)
         else:
+            if node.right is None:
+                raise ValueError("Правый узел не найден")
             return self._predict_sample(x, node.right)
 
     def predict(self, X: np.ndarray) -> np.ndarray:
@@ -211,7 +217,7 @@ class DecisionTree:
         return np.mean(predictions == y)
 
 
-def main():
+def main() -> None:
     """CLI интерфейс для дерева решений"""
     parser = argparse.ArgumentParser(description="Дерево решений для классификации")
     parser.add_argument(

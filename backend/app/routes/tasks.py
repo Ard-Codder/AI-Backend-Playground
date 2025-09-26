@@ -2,7 +2,7 @@
 Роуты для работы с задачами
 """
 
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -49,7 +49,7 @@ async def read_tasks(
 async def get_task_stats(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
-) -> dict:
+) -> dict[str, Any]:
     """Получение статистики задач пользователя"""
     task_service = TaskService(db)
     stats = await task_service.get_user_tasks_count(current_user.id)

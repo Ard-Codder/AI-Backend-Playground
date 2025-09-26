@@ -207,7 +207,7 @@ class RandomForest:
         return np.ones(n_features) / n_features
 
 
-def main():
+def main() -> None:
     """CLI интерфейс для случайного леса"""
     parser = argparse.ArgumentParser(description="Случайный лес для классификации")
     parser.add_argument(

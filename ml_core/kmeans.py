@@ -30,9 +30,9 @@ class KMeans:
         self.n_clusters = n_clusters
         self.max_iters = max_iters
         self.random_state = random_state
-        self.centroids = None
-        self.labels = None
-        self.inertia = None
+        self.centroids: Optional[np.ndarray] = None
+        self.labels: Optional[np.ndarray] = None
+        self.inertia: Optional[float] = None
 
     def _initialize_centroids(self, X: np.ndarray) -> np.ndarray:
         """Инициализация центроидов случайным образом"""
@@ -104,7 +104,11 @@ class KMeans:
             new_labels = self._assign_clusters(distances)
 
             # Проверка сходимости
-            if iteration > 0 and np.array_equal(self.labels, new_labels):
+            if (
+                iteration > 0
+                and self.labels is not None
+                and np.array_equal(self.labels, new_labels)
+            ):
                 break
 
             self.labels = new_labels
@@ -113,7 +117,8 @@ class KMeans:
             self.centroids = self._update_centroids(X, self.labels)
 
         # Вычисление финальной инерции
-        self.inertia = self._calculate_inertia(X, self.labels, self.centroids)
+        if self.labels is not None and self.centroids is not None:
+            self.inertia = self._calculate_inertia(X, self.labels, self.centroids)
 
         return self
 
@@ -144,10 +149,12 @@ class KMeans:
             labels: Метки кластеров, shape (n_samples,)
         """
         self.fit(X)
+        if self.labels is None:
+            raise ValueError("Ошибка при обучении модели")
         return self.labels
 
 
-def main():
+def main() -> None:
     """CLI интерфейс для K-Means"""
     parser = argparse.ArgumentParser(description="K-Means кластеризация")
     parser.add_argument(

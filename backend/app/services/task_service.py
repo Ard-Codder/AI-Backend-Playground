@@ -68,7 +68,7 @@ class TaskService:
         query = query.offset(skip).limit(limit)
 
         result = await self.db.execute(query)
-        return result.scalars().all()
+        return list(result.scalars().all())
 
     async def update_task(
         self, task_id: int, task_data: TaskUpdate, owner_id: Optional[int] = None

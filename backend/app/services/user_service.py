@@ -58,7 +58,7 @@ class UserService:
     async def get_users(self, skip: int = 0, limit: int = 100) -> List[User]:
         """Получение списка пользователей"""
         result = await self.db.execute(select(User).offset(skip).limit(limit))
-        return result.scalars().all()
+        return list(result.scalars().all())
 
     async def update_user(self, user_id: int, user_data: UserUpdate) -> Optional[User]:
         """Обновление данных пользователя"""
