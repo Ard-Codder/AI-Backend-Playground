@@ -43,17 +43,20 @@ class UserService:
     async def get_user(self, user_id: int) -> Optional[User]:
         """Получение пользователя по ID"""
         result = await self.db.execute(select(User).where(User.id == user_id))
-        return result.scalar_one_or_none()
+        user = result.scalar_one_or_none()
+        return user if user is not None else None
 
     async def get_by_email(self, email: str) -> Optional[User]:
         """Получение пользователя по email"""
         result = await self.db.execute(select(User).where(User.email == email))
-        return result.scalar_one_or_none()
+        user = result.scalar_one_or_none()
+        return user if user is not None else None
 
     async def get_by_username(self, username: str) -> Optional[User]:
         """Получение пользователя по username"""
         result = await self.db.execute(select(User).where(User.username == username))
-        return result.scalar_one_or_none()
+        user = result.scalar_one_or_none()
+        return user if user is not None else None
 
     async def get_users(self, skip: int = 0, limit: int = 100) -> List[User]:
         """Получение списка пользователей"""
@@ -65,7 +68,7 @@ class UserService:
         result = await self.db.execute(select(User).where(User.id == user_id))
         db_user = result.scalar_one_or_none()
 
-        if not db_user:
+        if db_user is None:
             return None
 
         update_data = user_data.model_dump(exclude_unset=True)
@@ -82,7 +85,7 @@ class UserService:
         try:
             await self.db.commit()
             await self.db.refresh(db_user)
-            return db_user
+            return db_user if db_user is not None else None
         except IntegrityError:
             await self.db.rollback()
             raise ValueError("Данные пользователя уже используются")

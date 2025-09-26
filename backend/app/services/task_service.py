@@ -44,7 +44,8 @@ class TaskService:
             query = query.where(Task.owner_id == owner_id)
 
         result = await self.db.execute(query)
-        return result.scalar_one_or_none()
+        task = result.scalar_one_or_none()
+        return task if task is not None else None
 
     async def get_tasks(
         self,
@@ -82,7 +83,7 @@ class TaskService:
         result = await self.db.execute(query)
         db_task = result.scalar_one_or_none()
 
-        if not db_task:
+        if db_task is None:
             return None
 
         update_data = task_data.model_dump(exclude_unset=True)
@@ -100,7 +101,7 @@ class TaskService:
 
         await self.db.commit()
         await self.db.refresh(db_task)
-        return db_task
+        return db_task if db_task is not None else None
 
     async def delete_task(self, task_id: int, owner_id: Optional[int] = None) -> bool:
         """Удаление задачи"""
