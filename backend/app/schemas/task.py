@@ -1,6 +1,7 @@
 """
 Pydantic схемы для задач
 """
+
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
@@ -9,6 +10,7 @@ from app.models.task import TaskStatus, TaskPriority
 
 class TaskBase(BaseModel):
     """Базовая схема задачи"""
+
     title: str = Field(..., min_length=1, max_length=200)
     description: Optional[str] = Field(None, max_length=1000)
     status: TaskStatus = TaskStatus.PENDING
@@ -18,11 +20,13 @@ class TaskBase(BaseModel):
 
 class TaskCreate(TaskBase):
     """Схема для создания задачи"""
+
     pass
 
 
 class TaskUpdate(BaseModel):
     """Схема для обновления задачи"""
+
     title: Optional[str] = Field(None, min_length=1, max_length=200)
     description: Optional[str] = Field(None, max_length=1000)
     status: Optional[TaskStatus] = None
@@ -33,6 +37,7 @@ class TaskUpdate(BaseModel):
 
 class TaskInDB(TaskBase):
     """Схема задачи в базе данных"""
+
     id: int
     owner_id: int
     is_completed: bool
@@ -46,6 +51,7 @@ class TaskInDB(TaskBase):
 
 class TaskResponse(TaskBase):
     """Схема ответа с данными задачи"""
+
     id: int
     owner_id: int
     is_completed: bool
