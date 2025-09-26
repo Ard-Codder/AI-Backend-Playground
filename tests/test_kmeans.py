@@ -85,8 +85,8 @@ class TestKMeans:
         kmeans1 = KMeans(n_clusters=4, random_state=42)
         kmeans2 = KMeans(n_clusters=4, random_state=42)
 
-        labels1 = kmeans1.fit_predict(self.X)
-        labels2 = kmeans2.fit_predict(self.X)
+        kmeans1.fit_predict(self.X)
+        kmeans2.fit_predict(self.X)
 
         # Проверяем, что инерция одинаковая (кластеры могут быть переставлены)
         assert abs(kmeans1.inertia - kmeans2.inertia) < 1e-10

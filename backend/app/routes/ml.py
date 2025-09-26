@@ -7,10 +7,7 @@ from typing import Any, Dict
 
 import pandas as pd
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.auth.security import get_current_active_user
-from app.db import get_db
 from app.models.user import User
 
 router = APIRouter()

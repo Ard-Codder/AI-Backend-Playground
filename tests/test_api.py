@@ -151,8 +151,8 @@ class TestTasks:
         """Подготовка для каждого теста"""
         # Регистрируем пользователя и получаем токен
         user_data = {
-            "email": f"taskuser@example.com",
-            "username": f"taskuser",
+            "email": "taskuser@example.com",
+            "username": "taskuser",
             "password": "testpassword123",
         }
 
@@ -222,12 +222,12 @@ class TestML:
         """Подготовка для каждого теста"""
         # Регистрируем пользователя и получаем токен
         user_data = {
-            "email": f"mluser@example.com",
-            "username": f"mluser",
+            "email": "mluser@example.com",
+            "username": "mluser",
             "password": "testpassword123",
         }
 
-        register_response = client.post("/api/v1/auth/register", json=user_data)
+        client.post("/api/v1/auth/register", json=user_data)
         login_data = {
             "username": user_data["username"],
             "password": user_data["password"],
