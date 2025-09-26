@@ -246,7 +246,7 @@ class TestML:
         if register_response.status_code != 200:
             print(f"ML Register response status: {register_response.status_code}")
             print(f"ML Register response body: {register_response.text}")
-        
+
         login_data = {
             "username": user_data["username"],
             "password": user_data["password"],
