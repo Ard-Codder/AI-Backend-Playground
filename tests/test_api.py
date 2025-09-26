@@ -160,11 +160,13 @@ class TestTasks:
         """Подготовка для каждого теста"""
         # Регистрируем пользователя и получаем токен
         import time
+        import random
 
         timestamp = int(time.time())
+        random_id = random.randint(1000, 9999)
         user_data = {
-            "email": f"taskuser{timestamp}@example.com",
-            "username": f"taskuser{timestamp}",
+            "email": f"taskuser{timestamp}{random_id}@example.com",
+            "username": f"taskuser{timestamp}{random_id}",
             "password": "testpassword123",
         }
 
@@ -172,6 +174,18 @@ class TestTasks:
         if register_response.status_code != 200:
             print(f"Register response status: {register_response.status_code}")
             print(f"Register response body: {register_response.text}")
+            # Если пользователь уже существует, попробуем войти
+            if "already exists" in register_response.text:
+                login_data = {
+                    "username": user_data["username"],
+                    "password": user_data["password"],
+                }
+                login_response = client.post("/api/v1/auth/login", data=login_data)
+                if login_response.status_code == 200:
+                    token_data = login_response.json()
+                    self.token = token_data["access_token"]
+                    self.headers = {"Authorization": f"Bearer {self.token}"}
+                    return
         assert register_response.status_code == 200
 
         login_data = {
