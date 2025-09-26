@@ -87,6 +87,9 @@ class TestAuthentication:
         }
 
         response = client.post("/api/v1/auth/register", json=user_data)
+        if response.status_code != 200:
+            print(f"Response status: {response.status_code}")
+            print(f"Response body: {response.text}")
         assert response.status_code == 200
 
         data = response.json()
@@ -105,6 +108,9 @@ class TestAuthentication:
 
         # Первая регистрация
         response1 = client.post("/api/v1/auth/register", json=user_data)
+        if response1.status_code != 200:
+            print(f"Response status: {response1.status_code}")
+            print(f"Response body: {response1.text}")
         assert response1.status_code == 200
 
         # Попытка дублирования
@@ -121,6 +127,9 @@ class TestAuthentication:
         }
 
         register_response = client.post("/api/v1/auth/register", json=user_data)
+        if register_response.status_code != 200:
+            print(f"Register response status: {register_response.status_code}")
+            print(f"Register response body: {register_response.text}")
         assert register_response.status_code == 200
 
         # Теперь входим
@@ -160,6 +169,9 @@ class TestTasks:
         }
 
         register_response = client.post("/api/v1/auth/register", json=user_data)
+        if register_response.status_code != 200:
+            print(f"Register response status: {register_response.status_code}")
+            print(f"Register response body: {register_response.text}")
         assert register_response.status_code == 200
 
         login_data = {
@@ -230,13 +242,20 @@ class TestML:
             "password": "testpassword123",
         }
 
-        client.post("/api/v1/auth/register", json=user_data)
+        register_response = client.post("/api/v1/auth/register", json=user_data)
+        if register_response.status_code != 200:
+            print(f"ML Register response status: {register_response.status_code}")
+            print(f"ML Register response body: {register_response.text}")
+        
         login_data = {
             "username": user_data["username"],
             "password": user_data["password"],
         }
 
         login_response = client.post("/api/v1/auth/login", data=login_data)
+        if login_response.status_code != 200:
+            print(f"ML Login response status: {login_response.status_code}")
+            print(f"ML Login response body: {login_response.text}")
         token_data = login_response.json()
         self.token = token_data["access_token"]
         self.headers = {"Authorization": f"Bearer {self.token}"}
