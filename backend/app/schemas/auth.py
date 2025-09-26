@@ -4,7 +4,7 @@ Pydantic схемы для аутентификации
 
 from typing import Optional
 
-from pydantic import BaseModel  # type: ignore
+from pydantic import BaseModel
 
 
 class Token(BaseModel):

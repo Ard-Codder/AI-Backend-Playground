@@ -4,8 +4,8 @@
 
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status  # type: ignore
-from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..auth.security import get_current_active_user
 from ..db import get_db
@@ -16,12 +16,12 @@ from ..services.user_service import UserService
 router = APIRouter()
 
 
-@router.get("/me", response_model=UserResponse)  # type: ignore
+@router.get("/me", response_model=UserResponse)
 async def read_users_me(
     current_user: User = Depends(get_current_active_user),
 ) -> UserResponse:
     """Получение данных текущего пользователя"""
-    return UserResponse.model_validate(current_user)  # type: ignore
+    return UserResponse.model_validate(current_user)
 
 
 @router.put("/me", response_model=UserResponse)  # type: ignore

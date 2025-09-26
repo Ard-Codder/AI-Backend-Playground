@@ -4,9 +4,9 @@
 
 from typing import List, Optional
 
-from sqlalchemy import select  # type: ignore
-from sqlalchemy.exc import IntegrityError  # type: ignore
-from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
+from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..auth.security import get_password_hash, verify_password
 from ..models.user import User

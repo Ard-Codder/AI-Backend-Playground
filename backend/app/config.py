@@ -4,7 +4,7 @@ Application configuration
 
 from typing import Optional
 
-from pydantic_settings import BaseSettings  # type: ignore
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):

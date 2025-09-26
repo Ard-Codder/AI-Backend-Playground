@@ -5,8 +5,8 @@
 from datetime import datetime
 from typing import List, Optional
 
-from sqlalchemy import and_, select  # type: ignore
-from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
+from sqlalchemy import and_, select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models.task import Task, TaskStatus
 from ..schemas.task import TaskCreate, TaskUpdate

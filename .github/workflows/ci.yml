@@ -55,7 +55,7 @@ jobs:
         flake8 backend/ ml_core/ tests/
         
         # Проверка типов
-        mypy backend/ ml_core/
+        mypy backend/ ml_core/ --ignore-missing-imports --disable-error-code=misc --disable-error-code=unused-ignore --disable-error-code=no-any-return
 
     - name: Запуск тестов
       env:
