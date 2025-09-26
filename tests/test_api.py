@@ -159,8 +159,8 @@ class TestTasks:
     def setup_method(self):
         """Подготовка для каждого теста"""
         # Регистрируем пользователя и получаем токен
-        import time
         import random
+        import time
 
         timestamp = int(time.time())
         random_id = random.randint(1000, 9999)
