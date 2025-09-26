@@ -3,16 +3,17 @@ Authentication routes
 """
 
 from datetime import timedelta
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.auth.security import create_access_token
+from app.config import settings
 from app.db import get_db
 from app.schemas.auth import Token
 from app.schemas.user import UserCreate, UserResponse
 from app.services.user_service import UserService
-from app.auth.security import create_access_token
-from app.config import settings
 
 router = APIRouter()
 

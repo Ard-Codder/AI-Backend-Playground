@@ -3,14 +3,15 @@
 """
 
 from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.auth.security import get_current_active_user
 from app.db import get_db
+from app.models.user import User
 from app.schemas.user import UserResponse, UserUpdate
 from app.services.user_service import UserService
-from app.auth.security import get_current_active_user
-from app.models.user import User
 
 router = APIRouter()
 

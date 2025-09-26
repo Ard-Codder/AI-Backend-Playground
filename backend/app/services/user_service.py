@@ -2,14 +2,15 @@
 Сервис для работы с пользователями
 """
 
-from typing import Optional, List
-from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List, Optional
+
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.auth.security import get_password_hash, verify_password
 from app.models.user import User
 from app.schemas.user import UserCreate, UserUpdate
-from app.auth.security import get_password_hash, verify_password
 
 
 class UserService:

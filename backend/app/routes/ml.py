@@ -2,14 +2,15 @@
 Роуты для ML функциональности
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from sqlalchemy.ext.asyncio import AsyncSession
-import pandas as pd
 import io
-from typing import Dict, Any
+from typing import Any, Dict
 
-from app.db import get_db
+import pandas as pd
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.auth.security import get_current_active_user
+from app.db import get_db
 from app.models.user import User
 
 router = APIRouter()

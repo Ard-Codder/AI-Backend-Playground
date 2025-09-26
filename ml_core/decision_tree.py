@@ -2,9 +2,10 @@
 Реализация дерева решений с нуля
 """
 
-import numpy as np
-from typing import Optional, Union, Dict, Any
 import argparse
+from typing import Any, Dict, Optional, Union
+
+import numpy as np
 
 
 class Node:

@@ -2,10 +2,12 @@
 Pydantic схемы для задач
 """
 
-from pydantic import BaseModel, Field
-from typing import Optional
 from datetime import datetime
-from app.models.task import TaskStatus, TaskPriority
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+from app.models.task import TaskPriority, TaskStatus
 
 
 class TaskBase(BaseModel):

@@ -2,9 +2,11 @@
 Реализация случайного леса с нуля
 """
 
-import numpy as np
-from typing import Optional, List
 import argparse
+from typing import List, Optional
+
+import numpy as np
+
 from .decision_tree import DecisionTree
 
 

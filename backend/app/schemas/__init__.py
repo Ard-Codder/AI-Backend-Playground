@@ -2,9 +2,9 @@
 Pydantic схемы для валидации данных
 """
 
-from .user import UserCreate, UserUpdate, UserInDB, UserResponse
-from .task import TaskCreate, TaskUpdate, TaskInDB, TaskResponse
 from .auth import Token, TokenData
+from .task import TaskCreate, TaskInDB, TaskResponse, TaskUpdate
+from .user import UserCreate, UserInDB, UserResponse, UserUpdate
 
 __all__ = [
     "UserCreate",

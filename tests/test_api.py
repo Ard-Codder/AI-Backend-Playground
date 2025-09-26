@@ -2,16 +2,16 @@
 Интеграционные тесты для API
 """
 
-import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
 import asyncio
 
-from backend.app.main import app
-from backend.app.db import get_db, Base
-from backend.app.config import settings
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import sessionmaker
 
+from backend.app.config import settings
+from backend.app.db import Base, get_db
+from backend.app.main import app
 
 # Тестовая база данных
 TEST_DATABASE_URL = "sqlite+aiosqlite:///./test.db"

@@ -2,10 +2,11 @@
 Тесты для K-Means алгоритма
 """
 
-import pytest
 import numpy as np
-from sklearn.datasets import make_blobs
+import pytest
 from sklearn.cluster import KMeans as SklearnKMeans
+from sklearn.datasets import make_blobs
+
 from ml_core.kmeans import KMeans
 
 

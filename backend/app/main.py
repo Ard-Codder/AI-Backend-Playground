@@ -2,13 +2,13 @@
 Main FastAPI application file
 """
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import uvicorn
 
 from app.config import settings
-from app.routes import auth, users, tasks, ml
+from app.routes import auth, ml, tasks, users
 
 
 def create_application() -> FastAPI:

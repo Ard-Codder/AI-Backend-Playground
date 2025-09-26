@@ -2,10 +2,11 @@
 Сервис для работы с задачами
 """
 
-from typing import Optional, List
 from datetime import datetime
+from typing import List, Optional
+
+from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, and_
 
 from app.models.task import Task, TaskStatus
 from app.schemas.task import TaskCreate, TaskUpdate

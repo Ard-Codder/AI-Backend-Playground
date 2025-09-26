@@ -5,8 +5,8 @@ ML Core - реализация алгоритмов машинного обуч�
 __version__ = "1.0.2"
 __author__ = "AI Backend Playground"
 
-from .kmeans import KMeans
 from .decision_tree import DecisionTree
+from .kmeans import KMeans
 from .random_forest import RandomForest
 
 __all__ = ["KMeans", "DecisionTree", "RandomForest"]
