@@ -20,8 +20,6 @@ from ..services.user_service import UserService
 security = HTTPBearer()
 
 
-
-
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     """Создание JWT токена"""
     to_encode = data.copy()
