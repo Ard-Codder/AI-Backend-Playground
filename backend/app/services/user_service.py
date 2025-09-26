@@ -8,8 +8,9 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.app.models.user import User
+
 from ..auth.password import get_password_hash, verify_password
-from ..models.user import User
 from ..schemas.user import UserCreate, UserUpdate
 
 
@@ -109,7 +110,7 @@ class UserService:
         if not user:
             return None
 
-        if not verify_password(password, user.hashed_password):
+        if not verify_password(password, str(user.hashed_password)):
             return None
 
         return user

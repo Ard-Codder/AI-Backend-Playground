@@ -7,10 +7,11 @@ from typing import Any, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status  # type: ignore
 from sqlalchemy.ext.asyncio import AsyncSession  # type: ignore
 
+from backend.app.models.task import TaskStatus
+from backend.app.models.user import User
+
 from ..auth.security import get_current_active_user
 from ..db import get_db
-from ..models.task import TaskStatus
-from ..models.user import User
 from ..schemas.task import TaskCreate, TaskResponse, TaskUpdate
 from ..services.task_service import TaskService
 
@@ -25,7 +26,7 @@ async def create_task(
 ) -> TaskResponse:
     """Создание новой задачи"""
     task_service = TaskService(db)
-    task = await task_service.create_task(task_data, current_user.id)
+    task = await task_service.create_task(task_data, int(current_user.id))
     return TaskResponse.model_validate(task)  # type: ignore
 
 
@@ -40,7 +41,7 @@ async def read_tasks(
     """Получение списка задач текущего пользователя"""
     task_service = TaskService(db)
     tasks = await task_service.get_tasks(
-        owner_id=current_user.id, status=status, skip=skip, limit=limit
+        owner_id=int(current_user.id), status=status, skip=skip, limit=limit
     )
     return [TaskResponse.model_validate(task) for task in tasks]
 
@@ -52,7 +53,7 @@ async def get_task_stats(
 ) -> dict[str, Any]:
     """Получение статистики задач пользователя"""
     task_service = TaskService(db)
-    stats = await task_service.get_user_tasks_count(current_user.id)
+    stats = await task_service.get_user_tasks_count(int(current_user.id))
     return stats
 
 
@@ -64,7 +65,7 @@ async def read_task(
 ) -> TaskResponse:
     """Получение задачи по ID"""
     task_service = TaskService(db)
-    task = await task_service.get_task(task_id, current_user.id)
+    task = await task_service.get_task(task_id, int(current_user.id))
 
     if not task:
         raise HTTPException(
@@ -83,7 +84,7 @@ async def update_task(
 ) -> TaskResponse:
     """Обновление задачи"""
     task_service = TaskService(db)
-    task = await task_service.update_task(task_id, task_update, current_user.id)
+    task = await task_service.update_task(task_id, task_update, int(current_user.id))
 
     if not task:
         raise HTTPException(
@@ -101,7 +102,7 @@ async def delete_task(
 ) -> dict:
     """Удаление задачи"""
     task_service = TaskService(db)
-    success = await task_service.delete_task(task_id, current_user.id)
+    success = await task_service.delete_task(task_id, int(current_user.id))
 
     if not success:
         raise HTTPException(

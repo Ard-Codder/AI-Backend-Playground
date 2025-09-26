@@ -8,7 +8,8 @@ from typing import List, Optional
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..models.task import Task, TaskStatus
+from backend.app.models.task import Task, TaskStatus
+
 from ..schemas.task import TaskCreate, TaskUpdate
 
 
@@ -61,7 +62,7 @@ class TaskService:
         if owner_id is not None:
             conditions.append(Task.owner_id == owner_id)
         if status is not None:
-            conditions.append(Task.status == status)
+            conditions.append(Task.status == status)  # type: ignore
 
         if conditions:
             query = query.where(and_(*conditions))

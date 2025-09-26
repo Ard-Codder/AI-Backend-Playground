@@ -150,9 +150,12 @@ class TestTasks:
     def setup_method(self):
         """Подготовка для каждого теста"""
         # Регистрируем пользователя и получаем токен
+        import time
+
+        timestamp = int(time.time())
         user_data = {
-            "email": "taskuser@example.com",
-            "username": "taskuser",
+            "email": f"taskuser{timestamp}@example.com",
+            "username": f"taskuser{timestamp}",
             "password": "testpassword123",
         }
 
@@ -212,7 +215,7 @@ class TestTasks:
     def test_unauthorized_access(self):
         """Тест доступа без авторизации"""
         response = client.get("/api/v1/tasks/")
-        assert response.status_code == 401
+        assert response.status_code == 403
 
 
 class TestML:

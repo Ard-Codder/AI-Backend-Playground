@@ -7,9 +7,10 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.app.models.user import User
+
 from ..auth.security import get_current_active_user
 from ..db import get_db
-from ..models.user import User
 from ..schemas.user import UserResponse, UserUpdate
 from ..services.user_service import UserService
 
@@ -34,7 +35,7 @@ async def update_user_me(
     user_service = UserService(db)
 
     try:
-        updated_user = await user_service.update_user(current_user.id, user_update)
+        updated_user = await user_service.update_user(int(current_user.id), user_update)
         if not updated_user:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
@@ -94,7 +95,7 @@ async def delete_user_me(
     """Удаление текущего пользователя"""
     user_service = UserService(db)
 
-    success = await user_service.delete_user(current_user.id)
+    success = await user_service.delete_user(int(current_user.id))
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
