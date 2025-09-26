@@ -7,12 +7,12 @@ from typing import Any, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.auth.security import get_current_active_user
-from app.db import get_db
-from app.models.task import TaskStatus
-from app.models.user import User
-from app.schemas.task import TaskCreate, TaskResponse, TaskUpdate
-from app.services.task_service import TaskService
+from ..auth.security import get_current_active_user
+from ..db import get_db
+from ..models.task import TaskStatus
+from ..models.user import User
+from ..schemas.task import TaskCreate, TaskResponse, TaskUpdate
+from ..services.task_service import TaskService
 
 router = APIRouter()
 

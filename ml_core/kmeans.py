@@ -59,7 +59,8 @@ class KMeans:
 
     def _assign_clusters(self, distances: np.ndarray) -> np.ndarray:
         """Назначение кластеров на основе минимальных расстояний"""
-        return np.argmin(distances, axis=1)
+        result = np.argmin(distances, axis=1)
+        return np.array(result, dtype=np.int32)
 
     def _update_centroids(self, X: np.ndarray, labels: np.ndarray) -> np.ndarray:
         """Обновление центроидов"""

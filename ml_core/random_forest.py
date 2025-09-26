@@ -3,7 +3,7 @@
 """
 
 import argparse
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import numpy as np
 
@@ -21,7 +21,7 @@ class RandomForest:
         max_depth: int = 10,
         min_samples_split: int = 2,
         min_samples_leaf: int = 1,
-        max_features: Optional[str] = "sqrt",
+        max_features: Union[str, int, float] = "sqrt",
         bootstrap: bool = True,
         random_state: Optional[int] = None,
     ):
@@ -64,6 +64,7 @@ class RandomForest:
         elif isinstance(self.max_features, float):
             n_selected = int(self.max_features * n_features)
         else:
+            # Fallback для неизвестных типов
             n_selected = n_features
 
         return np.random.choice(n_features, n_selected, replace=False)
@@ -127,15 +128,15 @@ class RandomForest:
             raise ValueError("Модель не обучена. Вызовите fit() перед predict()")
 
         # Сбор предсказаний от всех деревьев
-        tree_predictions = []
+        tree_predictions_list = []
 
         for tree, feature_indices in zip(self.trees, self.feature_indices):
             X_subset = X[:, feature_indices]
             predictions = tree.predict(X_subset)
-            tree_predictions.append(predictions)
+            tree_predictions_list.append(predictions)
 
         # Голосование (выбор наиболее частого класса)
-        tree_predictions = np.array(tree_predictions).T
+        tree_predictions = np.array(tree_predictions_list).T
 
         final_predictions = []
         for sample_predictions in tree_predictions:
@@ -158,14 +159,14 @@ class RandomForest:
             raise ValueError("Модель не обучена. Вызовите fit() перед predict_proba()")
 
         # Сбор предсказаний от всех деревьев
-        tree_predictions = []
+        tree_predictions_list = []
 
         for tree, feature_indices in zip(self.trees, self.feature_indices):
             X_subset = X[:, feature_indices]
             predictions = tree.predict(X_subset)
-            tree_predictions.append(predictions)
+            tree_predictions_list.append(predictions)
 
-        tree_predictions = np.array(tree_predictions).T
+        tree_predictions = np.array(tree_predictions_list).T
 
         # Получение всех возможных классов
         all_classes = np.unique(tree_predictions)
@@ -192,7 +193,7 @@ class RandomForest:
             accuracy: Точность модели
         """
         predictions = self.predict(X)
-        return np.mean(predictions == y)
+        return float(np.mean(predictions == y))
 
     def feature_importance(self) -> np.ndarray:
         """

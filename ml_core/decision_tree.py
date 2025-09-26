@@ -51,19 +51,19 @@ class DecisionTree:
         self.min_samples_split = min_samples_split
         self.min_samples_leaf = min_samples_leaf
         self.random_state = random_state
-        self.root = None
+        self.root: Optional[Node] = None
 
     def _gini_impurity(self, y: np.ndarray) -> float:
         """Вычисление коэффициента Джини"""
         _, counts = np.unique(y, return_counts=True)
         probabilities = counts / len(y)
-        return 1 - np.sum(probabilities**2)
+        return float(1 - np.sum(probabilities**2))
 
     def _entropy(self, y: np.ndarray) -> float:
         """Вычисление энтропии"""
         _, counts = np.unique(y, return_counts=True)
         probabilities = counts / len(y)
-        return -np.sum(probabilities * np.log2(probabilities + 1e-8))
+        return float(-np.sum(probabilities * np.log2(probabilities + 1e-8)))
 
     def _information_gain(
         self, X: np.ndarray, y: np.ndarray, feature: int, threshold: float
@@ -86,11 +86,11 @@ class DecisionTree:
         ) * right_entropy
 
         # Информационный выигрыш
-        return self._entropy(y) - weighted_entropy
+        return float(self._entropy(y) - weighted_entropy)
 
     def _best_split(self, X: np.ndarray, y: np.ndarray) -> tuple:
         """Поиск лучшего разделения"""
-        best_gain = -1
+        best_gain = -1.0
         best_feature = None
         best_threshold = None
 
@@ -112,7 +112,11 @@ class DecisionTree:
     def _most_common_class(self, y: np.ndarray) -> Union[int, float]:
         """Определение наиболее частого класса"""
         values, counts = np.unique(y, return_counts=True)
-        return values[np.argmax(counts)]
+        result = values[np.argmax(counts)]
+        if isinstance(result, (int, float)):
+            return result
+        else:
+            return float(result)
 
     def _build_tree(self, X: np.ndarray, y: np.ndarray, depth: int = 0) -> Node:
         """Рекурсивное построение дерева"""
@@ -214,7 +218,7 @@ class DecisionTree:
             accuracy: Точность модели
         """
         predictions = self.predict(X)
-        return np.mean(predictions == y)
+        return float(np.mean(predictions == y))
 
 
 def main() -> None:

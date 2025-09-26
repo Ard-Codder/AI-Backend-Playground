@@ -11,11 +11,11 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import settings
-from app.db import get_db
-from app.models.user import User
-from app.schemas.auth import TokenData
-from app.services.user_service import UserService
+from ..config import settings
+from ..db import get_db
+from ..models.user import User
+from ..schemas.auth import TokenData
+from ..services.user_service import UserService
 
 # Контекст для хеширования паролей
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -82,6 +82,11 @@ async def get_current_user(
     """Получение текущего пользователя из токена"""
     token = credentials.credentials
     token_data = await verify_token(token)
+
+    if token_data.username is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
+        )
 
     user_service = UserService(db)
     user = await user_service.get_by_username(token_data.username)

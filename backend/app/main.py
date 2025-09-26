@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.config import settings
-from app.routes import auth, ml, tasks, users
+from .config import settings
+from .routes import auth, ml, tasks, users
 
 
 def create_application() -> FastAPI:

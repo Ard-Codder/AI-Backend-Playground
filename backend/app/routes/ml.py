@@ -8,8 +8,8 @@ from typing import Any, Dict
 import pandas as pd
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
-from app.auth.security import get_current_active_user
-from app.models.user import User
+from ..auth.security import get_current_active_user
+from ..models.user import User
 
 router = APIRouter()
 
@@ -57,7 +57,7 @@ async def upload_data(
 ) -> Dict[str, Any]:
     """Загрузка данных для ML обработки"""
 
-    if not file.filename.endswith(".csv"):
+    if not file.filename or not file.filename.endswith(".csv"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Поддерживаются только CSV файлы",
