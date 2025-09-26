@@ -2,12 +2,13 @@
 Настройка базы данных
 """
 
+from typing import AsyncGenerator
+
 from sqlalchemy.ext.asyncio import (  # type: ignore
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
-from typing import AsyncGenerator
 from sqlalchemy.orm import DeclarativeBase  # type: ignore
 
 from .config import settings
