@@ -33,3 +33,4 @@ pandas-stubs>=2.3.2
 
 # Database
 psycopg2-binary>=2.9.9
+aiosqlite>=0.19.0
