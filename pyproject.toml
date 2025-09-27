@@ -65,7 +65,7 @@ packages = ["backend", "ml_core"]
 
 [project]
 name = "ai-backend-playground"
-version = "1.1.0"
+version = "1.2.0"
 description = "AI Backend Playground - FastAPI + ML algorithms from scratch"
 authors = [{name = "Ard-Codder", email = "kirartmax1@gmail.com"}]
 license = {text = "MIT"}

@@ -6,7 +6,7 @@ import io
 from typing import Any, Dict
 
 import pandas as pd
-from fastapi import (  # type: ignore
+from fastapi import (
     APIRouter,
     Depends,
     File,
@@ -21,7 +21,7 @@ from ..models.user import User
 router = APIRouter()
 
 
-@router.get("/")  # type: ignore
+@router.get("/")
 async def ml_info(
     current_user: User = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
@@ -58,7 +58,7 @@ async def ml_info(
     }
 
 
-@router.post("/upload-data")  # type: ignore
+@router.post("/upload-data")
 async def upload_data(
     file: UploadFile = File(...), current_user: User = Depends(get_current_active_user)
 ) -> Dict[str, Any]:

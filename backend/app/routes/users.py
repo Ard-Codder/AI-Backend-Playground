@@ -24,7 +24,7 @@ async def read_users_me(
     return UserResponse.model_validate(current_user)
 
 
-@router.put("/me", response_model=UserResponse)  # type: ignore
+@router.put("/me", response_model=UserResponse)
 async def update_user_me(
     user_update: UserUpdate,
     current_user: User = Depends(get_current_active_user),
@@ -39,12 +39,12 @@ async def update_user_me(
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
             )
-        return UserResponse.model_validate(updated_user)  # type: ignore
+        return UserResponse.model_validate(updated_user)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-@router.get("/", response_model=List[UserResponse])  # type: ignore
+@router.get("/", response_model=List[UserResponse])
 async def read_users(
     skip: int = 0,
     limit: int = 100,
@@ -62,7 +62,7 @@ async def read_users(
     return [UserResponse.model_validate(user) for user in users]
 
 
-@router.get("/{user_id}", response_model=UserResponse)  # type: ignore
+@router.get("/{user_id}", response_model=UserResponse)
 async def read_user(
     user_id: int,
     current_user: User = Depends(get_current_active_user),
@@ -83,10 +83,10 @@ async def read_user(
             status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден"
         )
 
-    return UserResponse.model_validate(user)  # type: ignore
+    return UserResponse.model_validate(user)
 
 
-@router.delete("/me")  # type: ignore
+@router.delete("/me")
 async def delete_user_me(
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),

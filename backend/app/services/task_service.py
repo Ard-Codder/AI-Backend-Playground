@@ -61,8 +61,7 @@ class TaskService:
         if owner_id is not None:
             conditions.append(Task.owner_id == owner_id)
         if status is not None:
-            conditions.append(Task.status == status)  # type: ignore
-
+            conditions.append(Task.status == status)
         if conditions:
             query = query.where(and_(*conditions))
 

@@ -259,7 +259,7 @@ def main() -> None:
 
     try:
         import pandas as pd
-        from sklearn.model_selection import train_test_split  # type: ignore
+        from sklearn.model_selection import train_test_split
 
         # Загрузка данных
         data = pd.read_csv(args.data)
