@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     # API settings
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "AI Backend Playground"
-    VERSION: str = "1.0.2"
+    VERSION: str = "1.1.0"
     DESCRIPTION: str = "FastAPI backend with ML algorithms from scratch"
 
     # Database
