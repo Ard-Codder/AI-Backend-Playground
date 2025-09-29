@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AI Backend Playground - Live Demonstration
+ML-Backend Playground - Live Demonstration
 This script demonstrates the key features of the project
 """
 
@@ -244,7 +244,7 @@ def demonstrate_api_documentation():
 
 def main():
     """Main demonstration function"""
-    print("🚀 AI Backend Playground - Live Demonstration")
+    print("🚀 ML-Backend Playground - Live Demonstration")
     print("This script will test all major features of the project\n")
     
     # Check if API is running

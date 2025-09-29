@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to AI Backend Playground will be documented in this file.
+All notable changes to ML-Backend Playground will be documented in this file.
 
 ## [1.2.0] - 2025-09-27
 

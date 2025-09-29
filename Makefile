@@ -1,4 +1,4 @@
-# Makefile для AI Backend Playground
+# Makefile для ML-Backend Playground
 
 .PHONY: help install dev test lint format docker-build docker-up docker-down clean
 
@@ -8,7 +8,7 @@ PIP := pip
 DOCKER_COMPOSE := docker-compose
 
 help: ## Показать справку по командам
-	@echo "AI Backend Playground - Команды разработки"
+	@echo "ML-Backend Playground - Команды разработки"
 	@echo ""
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 

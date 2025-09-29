@@ -3,7 +3,7 @@ ML Core - реализация алгоритмов машинного обуч�
 """
 
 __version__ = "1.1.0"
-__author__ = "AI Backend Playground"
+__author__ = "ML-Backend Playground"
 
 from .decision_tree import DecisionTree
 from .kmeans import KMeans

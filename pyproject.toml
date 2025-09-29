@@ -64,9 +64,9 @@ packages = ["backend", "ml_core"]
 "*" = ["*.py", "*.pyi"]
 
 [project]
-name = "ai-backend-playground"
+name = "ml-backend-playground"
 version = "1.2.0"
-description = "AI Backend Playground - FastAPI + ML algorithms from scratch"
+description = "ML-Backend Playground - FastAPI + ML algorithms from scratch"
 authors = [{name = "Ard-Codder", email = "kirartmax1@gmail.com"}]
 license = {text = "MIT"}
 readme = "README.md"
@@ -107,9 +107,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Ard-Codder/ai-backend-playground"
-Repository = "https://github.com/Ard-Codder/ai-backend-playground"
-Issues = "https://github.com/Ard-Codder/ai-backend-playground/issues"
+Homepage = "https://github.com/Ard-Codder/ml-backend-playground"
+Repository = "https://github.com/Ard-Codder/ml-backend-playground"
+Issues = "https://github.com/Ard-Codder/ml-backend-playground/issues"
 
 [project.scripts]
 ml-kmeans = "ml_core.kmeans:main"

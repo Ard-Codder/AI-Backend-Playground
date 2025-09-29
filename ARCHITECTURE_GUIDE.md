@@ -1,4 +1,4 @@
-# 🏗️ AI Backend Playground - Architecture Guide
+# 🏗️ ML-Backend Playground - Architecture Guide
 
 ## 📋 Table of Contents
 1. [System Overview](#system-overview)
@@ -16,7 +16,7 @@
 
 ## 🎯 System Overview
 
-**AI Backend Playground** is a full-stack demonstration project showcasing modern backend development practices combined with machine learning algorithms implemented from scratch. The system is designed to demonstrate professional-level skills in:
+**ML-Backend Playground** is a full-stack demonstration project showcasing modern backend development practices combined with machine learning algorithms implemented from scratch. The system is designed to demonstrate professional-level skills in:
 
 - **Backend Development**: FastAPI, async/await, PostgreSQL
 - **Machine Learning**: Custom algorithm implementations
@@ -34,7 +34,7 @@
 ## 📁 Project Structure
 
 ```
-ai-backend-playground/
+ml-backend-playground/
 ├── 🌐 backend/                  # FastAPI Web Application
 │   └── app/
 │       ├── models/              # SQLAlchemy Database Models
@@ -500,7 +500,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/ai_playground
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/ml_playground
     depends_on:
       db:
         condition: service_healthy
@@ -635,7 +635,7 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: ai_playground_test
+          POSTGRES_DB: ml_playground_test
         options: --health-cmd pg_isready --health-interval 10s
     
     steps:
@@ -730,7 +730,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ardcodder/ai-backend:latest
+        image: ardcodder/ml-backend:latest
         ports:
         - containerPort: 8000
         env:

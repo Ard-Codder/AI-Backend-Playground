@@ -1,8 +1,8 @@
-# 🔍 How AI Backend Playground Works
+# 🔍 How ML-Backend Playground Works
 
 ## 🎯 Quick Overview
 
-**AI Backend Playground** is a modern, production-ready backend application that demonstrates professional software development skills by combining:
+**ML-Backend Playground** is a modern, production-ready backend application that demonstrates professional software development skills by combining:
 
 - **🌐 REST API** built with FastAPI (async Python web framework)
 - **🗄️ Database** using PostgreSQL with SQLAlchemy ORM
@@ -23,8 +23,8 @@
 ### Quick Start
 ```bash
 # 1. Clone and enter project
-git clone https://github.com/Ard-Codder/ai-backend-playground.git
-cd ai-backend-playground
+git clone https://github.com/Ard-Codder/ml-backend-playground.git
+cd ml-backend-playground
 
 # 2. Start all services
 docker-compose up -d
@@ -78,7 +78,7 @@ HTTP Request → FastAPI Router → Pydantic Validation → Service Layer → Da
 - **How it works**: 
   ```python
   # Creates FastAPI app with automatic documentation
-  app = FastAPI(title="AI Backend Playground", docs_url="/docs")
+  app = FastAPI(title="ML-Backend Playground", docs_url="/docs")
   
   # Adds CORS middleware for browser compatibility
   app.add_middleware(CORSMiddleware, allow_origins=["*"])
@@ -553,8 +553,8 @@ make ml-kmeans ARGS="--data data.csv --clusters 3"  # Run ML algorithms
 2. **VPS Deployment**
    ```bash
    # On server
-   git clone https://github.com/Ard-Codder/ai-backend-playground.git
-   cd ai-backend-playground
+  git clone https://github.com/Ard-Codder/ml-backend-playground.git
+  cd ml-backend-playground
    docker-compose up -d
    ```
 
@@ -763,6 +763,6 @@ This project demonstrates:
 
 ---
 
-**🎉 Project Complete!** You have successfully created a comprehensive, production-ready AI Backend Playground that demonstrates professional software development skills. All planned phases (1-3) are fully implemented and ready for portfolio demonstration.
+**🎉 Project Complete!** You have successfully created a comprehensive, production-ready ML-Backend Playground that demonstrates professional software development skills. All planned phases (1-3) are fully implemented and ready for portfolio demonstration.
 
 **Key Achievement**: This project rivals commercial ML platforms in terms of architecture quality and implementation depth, while being completely custom-built to showcase your technical expertise.

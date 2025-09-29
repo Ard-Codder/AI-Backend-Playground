@@ -56,7 +56,7 @@ async def root() -> JSONResponse:
     """Root endpoint"""
     return JSONResponse(
         content={
-            "message": "AI Backend Playground API",
+            "message": "ML-Backend Playground API",
             "version": settings.VERSION,
             "docs": "/docs",
             "redoc": "/redoc",

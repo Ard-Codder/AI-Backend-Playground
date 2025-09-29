@@ -4,10 +4,10 @@ services:
   # База данных PostgreSQL
   db:
     image: postgres:15-alpine
-    container_name: ai_playground_db
+    container_name: ml_playground_db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ai_playground
+      POSTGRES_DB: ml_playground
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -24,7 +24,7 @@ services:
   # Adminer для управления БД (опционально)
   adminer:
     image: adminer
-    container_name: ai_playground_adminer
+    container_name: ml_playground_adminer
     restart: unless-stopped
     ports:
       - "8080:8080"
@@ -34,12 +34,12 @@ services:
   # Backend приложение
   backend:
     build: .
-    container_name: ai_playground_backend
+    container_name: ml_playground_backend
     restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/ai_playground
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/ml_playground
       - SECRET_KEY=dev-secret-key-change-in-production-32chars
       - ENVIRONMENT=development
       - DEBUG=true
@@ -57,4 +57,4 @@ volumes:
 
 networks:
   default:
-    name: ai_playground_network
+    name: ml_playground_network
